@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
+import '../Css/Register-Login.css';
 
 class Register extends Component {
     constructor(props) {
@@ -9,7 +12,11 @@ class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            registered: false
+
+            registered: false,
+            alreadyRegistered: false,
+
+            errRegister: ''
         }
     }
 
@@ -21,9 +28,20 @@ class Register extends Component {
         this.setState({ password: e.target.value })
     }
 
-    register = () => {
-        let { email, password } = this.state;
+    register = (e) => {
+        let { email, password } = this.state;          // OOOBSSSS !!! fixa logik för att inte kunna submit ifall input fältet är tomt!
         const API_ROOT = 'http://3.120.96.16:3002';
+
+        let validEmail = /^([A-Z\d\.-]+)@([A-Z\d-]+)\.([A-Z]{2,8})(\.[A-Z]{2,8})?$/i.test(email);
+        let validPassword = /^[A-Za-z]\w{6,14}$/i.test(password);
+        if (!validEmail ) {
+            return null
+        }
+        else if (!validPassword) {
+            return null
+        }
+        else {
+
 
         let data = {
             email: email,
@@ -38,29 +56,66 @@ class Register extends Component {
         })
         .catch(err => {
             console.log(err);
+            this.setState({ alreadyRegistered: true });
+
+            if (this.state.alreadyRegistered) {
+                this.setState({ errRegister: 'Ooopps!!! This account is already registered!' })
+            } else {
+                this.setState({ errRegister: '' })
+            }
         })
+    }
     }
 
 
     render() {
-        const { email, password, registered } = this.state;
+        const { email, password, registered, errRegister } = this.state;
 
         if (registered) return <Redirect to="/login" />
 
         return (
-            <form onSubmit={e => e.preventDefault()}>
-                <label>
-                    Email:
-                    <input type="text" value={email} onChange={this.emailOnchange}/>
-                </label>
+            <div>
+            <div className="register-login-container">
+                <div className="my-page">
+                    <div className="navLinks-container">
+                    <Helmet>
+                        <title>Register</title>
+                    </Helmet>
 
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={this.passwordOnchange}/>
-                </label>
+                    <div className="navlinks">
+                        <Link className="register-links" to="/login">
+                            <p>LogIn</p>
+                        </Link>
+                    </div>
 
-                <button onClick={this.register}>Register</button>
-            </form>
+                    <div className="navlinks">
+                        <Link className="register-links" to="/">
+                            <p>Main Page</p>
+                        </Link>
+                    </div>
+                </div>
+
+                    <form onSubmit={e => e.preventDefault()}>
+                        <div className="box">
+                            <div className="form-head">
+                                <h2>Register</h2>
+                            </div>
+
+                        <div className="form-body">
+                            <input type="email" minLength="1" value={email} onChange={this.emailOnchange} placeholder="email..." />
+                            <input type="password" value={password} onChange={this.passwordOnchange} placeholder="Password... Between 7 and 14"/>
+                        </div>
+
+                        <div className="form-footer">
+                            <button onClick={this.register}>Register</button>
+                        </div>
+                        <br/>
+                        <p style={{ color: '#fff', fontSize: '2rem' }}>{errRegister}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            </div>
         )
     }
 }
