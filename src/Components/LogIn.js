@@ -16,7 +16,6 @@ class LogIn extends Component {
             password: '',
 
             loggedIn: false,
-            // token: false
 
             invalidLogin: false,
             errLogin: '',
@@ -37,6 +36,17 @@ class LogIn extends Component {
         let { email, password } = this.state;
         const API_ROOT = 'http://3.120.96.16:3002';
 
+        let validEmail = /^([A-Z\d\.-]+)@([A-Z\d-]+)\.([A-Z]{2,8})(\.[A-Z]{2,8})?$/i.test(email);
+        let validPassword = /^[A-Za-z]?\w{3,14}?$/i.test(password);
+
+        if (!validEmail) {
+            return null
+        }
+        else if (!validPassword) {
+            return null
+        }
+        else {
+
         let data = {
             email: email,
             password: password
@@ -45,8 +55,8 @@ class LogIn extends Component {
         axios
             .post(`${API_ROOT}/auth`, data)
         .then(res => {
-            console.log(res);
             let token = res.data.token;
+            console.log(token);
 
             updateToken(token);
 
@@ -54,19 +64,18 @@ class LogIn extends Component {
         })
         .catch(err => {
             console.log(err);
-            // this.setState({ token: true });
 
             this.setState({ invalidLogin: true });
 
             if (this.state.invalidLogin) {
-                this.setState({ errLogin: 'Invalid email or password! Please try again...'});
-            }
-            else {
-                this.setState({ errLogin: '' });
+                this.setState({ errLogin: 'Invalid email or password! Please try again...' })
+            } else {
+                this.setState({ errLogin: '' })
             }
 
             updateToken(null);
         })
+    }
     }
 
 
@@ -75,41 +84,52 @@ class LogIn extends Component {
 
         if (loggedIn) return <Redirect to="/todo" />
 
-        // if (token) return <Redirect to="/login" />
-
 
         return (
             <>
-            <Helmet>
-                <title>LogIn</title>
-            </Helmet>
+            <div className="register-login-container">
+                <div className="my-login-page">
+                    <div className="navLinks-container">
+                        <Helmet>
+                            <title>LogIn</title>
+                        </Helmet>
 
-            <Link to="/">
-                <p>Main Page</p>
-            </Link>
+                        <div className="navlinks">
+                            <Link className="login-links" to="/">
+                                <p>Main Page</p>
+                            </Link>
+                        </div>
+                    </div>
 
-            <form onSubmit={e => e.preventDefault()}>
-                <label>
-                    Email:
-                    <input type="email" minLength="3" value={email} onChange={this.emailOnchange}/>
-                </label>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <div className="login-box">
+                            <div className="form-head">
+                                <h2>Login</h2>
+                            </div>
 
-                <label>
-                    Password:
-                    <input type="password" minLength="1" value={password} onChange={this.passwordOnchange}/>
-                </label>
+                            <div className="form-body">
+                                <input type="email" value={email} onChange={this.emailOnchange} placeholder="example@example.com"/>
+                                <input type="password" value={password} onChange={this.passwordOnchange} placeholder="Password... Between 3 and 14" />
+                            </div>
 
-                <button onClick={this.loginValidator}>Log in</button>
-                <br/>
-                <p>{ errLogin }</p>
-            </form>
+                            <div className="form-footer login-button">
+                                <button onClick={this.loginValidator}>Log in</button>
+                            </div>
 
-            <div>
-                <p>Haven't registered yet?</p>
-                <p>Please click on register button to register!</p>
-                <Link to="/register">
-                    <button>Register</button>
-                </Link>
+                            <br/>
+
+                            <p style={{ color: 'red', fontSize: '2rem' }}>{errLogin}</p>
+                        </div>
+                    </form>
+
+                    <div className="not-registered">
+                        <p>Haven't registered yet?</p>
+                        <p>Please click on register button to register!</p>
+                        <Link to="/register">
+                            <button>Register</button>
+                        </Link>
+                    </div>
+            </div>
             </div>
             </>
         )

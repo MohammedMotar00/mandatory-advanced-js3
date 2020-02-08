@@ -128,20 +128,19 @@ class RenderTodos extends Component {
 
         let items = todoList.map(todo => {
             return (
-                <div key={todo.id}>
-                    <p key={todo.id}>{todo.content}</p>
-                    <button onClick={() => this.deleteTodo(todo.id)}>Delete item</button>
+                <div key={todo.id} className="todo-items">
+                    <p className="item" key={todo.id}>{todo.content}</p>
+                    <button className="delete-btn" onClick={() => this.deleteTodo(todo.id)}>Delete item</button>
                 </div>
             )
         });
 
 
         return (
-            <div>
+            <div className="todo-page">
                 <Helmet>
                     <title>Todo</title>
                 </Helmet>
-                <p>{this.state.currentTime}</p>
                 <AddTodos renderedItems={items} logout={btn} />
             </div>
         )

@@ -33,7 +33,7 @@ class Register extends Component {
         const API_ROOT = 'http://3.120.96.16:3002';
 
         let validEmail = /^([A-Z\d\.-]+)@([A-Z\d-]+)\.([A-Z]{2,8})(\.[A-Z]{2,8})?$/i.test(email);
-        let validPassword = /^[A-Za-z]\w{6,14}$/i.test(password);
+        let validPassword = /^[A-Za-z]?\w{3,14}?$/i.test(password);
         if (!validEmail ) {
             return null
         }
@@ -76,41 +76,41 @@ class Register extends Component {
         return (
             <div>
             <div className="register-login-container">
-                <div className="my-page">
+                <div className="my-register-page">
                     <div className="navLinks-container">
-                    <Helmet>
-                        <title>Register</title>
-                    </Helmet>
+                        <Helmet>
+                            <title>Register</title>
+                        </Helmet>
 
-                    <div className="navlinks">
-                        <Link className="register-links" to="/login">
-                            <p>LogIn</p>
-                        </Link>
-                    </div>
+                        <div className="navlinks">
+                            <Link className="register-links" to="/login">
+                                <p>LogIn</p>
+                            </Link>
+                        </div>
 
-                    <div className="navlinks">
-                        <Link className="register-links" to="/">
-                            <p>Main Page</p>
-                        </Link>
+                        <div className="navlinks">
+                            <Link className="register-links" to="/">
+                                <p>Main Page</p>
+                            </Link>
+                        </div>
                     </div>
-                </div>
 
                     <form onSubmit={e => e.preventDefault()}>
-                        <div className="box">
+                        <div className="register-box">
                             <div className="form-head">
                                 <h2>Register</h2>
                             </div>
 
                         <div className="form-body">
-                            <input type="email" minLength="1" value={email} onChange={this.emailOnchange} placeholder="email..." />
-                            <input type="password" value={password} onChange={this.passwordOnchange} placeholder="Password... Between 7 and 14"/>
+                            <input type="email" value={email} onChange={this.emailOnchange} placeholder="example@example.com" />
+                            <input type="password" value={password} onChange={this.passwordOnchange} placeholder="Password... Between 3 and 14"/>
                         </div>
 
                         <div className="form-footer">
                             <button onClick={this.register}>Register</button>
                         </div>
                         <br/>
-                        <p style={{ color: '#fff', fontSize: '2rem' }}>{errRegister}</p>
+                        <p style={{ color: 'red', fontSize: '2rem' }}>{errRegister}</p>
                         </div>
                     </form>
                 </div>

@@ -20,7 +20,7 @@
 .div-img-background {
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.7)), url('./Img/img.jpg') no-repeat center center/cover;
+  background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.8)), url('./Img/img.jpg') no-repeat center center/cover;
 }
 
 .links {

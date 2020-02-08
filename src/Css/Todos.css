@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.todo-page {
+    height: 100vh;
+    background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.9)), url('../Img/register-img.jpg') no-repeat center center/cover;
+}
+
+.todo-container {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-item-container {
+    width: 60%;
+    border: 1px solid;
+}
+
+.todo-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    padding: 1.2rem;
+    word-break: break-all;
+}
+
+.item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.4rem;
+
+}
+
+.delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.4rem;
+}

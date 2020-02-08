@@ -1,62 +1,62 @@
 .navLinks-container {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
 
 .navlinks {
-  margin: 1.5rem;
-  padding: 1.4rem;
+margin: 1.5rem;
+padding: 1.4rem;
 }
 
 .register-links {
-  color: white;
-  font-size: 2.5rem;
+color: white;
+font-size: 2.5rem;
 }
 
 .register-links:link {
-  text-decoration: none;
+text-decoration: none;
 }
 
 .register-links:hover {
-  font-size: 2.7rem;
-  color: red;
-  transition: all .6s ease-in-out;
+font-size: 2.7rem;
+color: red;
+transition: all .6s ease-in-out;
 }
 
-  /* ///////////////////////////////// */
+/* ///////////////////////////////// */
 .register-login-container {
     width: 100%;
     height: 100vh;
 }
 
-.my-page {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.9)), url('../Img/register-img.jpg') no-repeat center center/cover;
+.my-register-page {
+height: 100%;
+width: 100%;
+background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.9)), url('../Img/register-img.jpg') no-repeat center center/cover;
 }
 
-.box {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 43%;
+.register-box {
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 43%;
 }
 
 .form-head h2 {
     text-align: center;
     margin: 10px 0px 20px;
     color: #ffffff;
-  }
-  
-  .form-body {
+}
+
+.form-body {
     display: flex;
     flex-direction: column;
-  }
-  
-  .form-body input {
+}
+
+.form-body input {
     height: 40px;
     margin-bottom: 20px;
     border: 1px solid #ffffff;
@@ -66,18 +66,18 @@
     text-align: center;
     color: #ffffff;
     font-size: 1.3rem;
-  }
-  
-  .form-body input:focus {
+}
+
+.form-body input:focus {
     box-shadow: 0px 0px 10px #ffffff;
     outline: none;
-  }
-  
-  .form-body input::placeholder {
+}
+
+.form-body input::placeholder {
     color: #ffffff;
-  }
-  
-  .form-footer button {
+}
+
+.form-footer button {
     height: 40px;
     border-radius: 20px;
     padding: 0px 50px;
@@ -85,11 +85,81 @@
     background-color: #f44336;
     border: none;
     cursor: pointer;
-    transition: box-shadow .5s ease;
+    transition: all .5s ease;
     outline: none;
     font-size: 1.6rem;
-  }
-  
-  .form-footer button:hover {
+}
+
+.form-footer button:hover {
     box-shadow: 0px 0px 10px #ffffff;
-  }
+}
+
+.login-button button:hover {
+    box-shadow: 0px 0px 10px #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+/* Login */
+
+
+.my-login-page {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.9)), url('../Img/login-img.jpg') no-repeat center center/cover;
+}
+
+.login-links {
+    color: white;
+    font-size: 2.5rem;
+    }
+
+.login-links:link {
+    text-decoration: none;
+}
+
+.login-links:hover {
+    font-size: 2.7rem;
+    color: red;
+    transition: all .6s ease-in-out;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 43%;
+}
+
+.not-registered {
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 2rem;
+    color: #fff;
+}
+
+.not-registered button {
+    margin-top: 1.3rem;
+    height: 40px;
+    border-radius: 20px;
+    padding: 0px 50px;
+    color: #ffffff;
+    background-color: #f44336;
+    border: none;
+    cursor: pointer;
+    transition: all .5s ease;
+    outline: none;
+    font-size: 1.6rem;
+}
+
+.not-registered button:hover {
+    box-shadow: 0px 0px 10px #ffffff;
+    background-color: rgba(0, 0, 0, 0);
+}

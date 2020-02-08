@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import { token$, updateToken } from './TokenStore';
+import { token$ } from './TokenStore';
+
+import '../Css/Todos.css';
 
 
 class AddTodos extends Component {
@@ -27,6 +29,11 @@ class AddTodos extends Component {
     addTodo = () => {
         let { content } = this.state;
         const API_ROOT = 'http://3.120.96.16:3002';
+
+        if (content === "") {
+            return null;
+        }
+        else {
 
         this.subscription = token$.subscribe(token => {
             console.log(token);
@@ -63,6 +70,7 @@ class AddTodos extends Component {
             })
         })
     }
+    }
 
     deleteAddedTodo = (id) => {
         const API_ROOT = 'http://3.120.96.16:3002';
@@ -95,7 +103,7 @@ class AddTodos extends Component {
     render() {
         const { content, todos, errAddTodoMsg } = this.state;
 
-        let addTodo = todos.map(todo => {
+        let addTodos = todos.map(todo => {
             return (
                 <div key={todo.id}>
                     <p key={todo.id}>{todo.content}</p>
@@ -106,7 +114,7 @@ class AddTodos extends Component {
 
 
         return (
-            <>
+            <div >
             <Link to="/">
                 <p>Main Page</p>
             </Link>
@@ -125,9 +133,13 @@ class AddTodos extends Component {
 
             <br/>
 
-            {this.props.renderedItems}
-            {addTodo}
-            </>
+            <div className="todo-container">
+            <div className="todo-item-container">
+                {this.props.renderedItems}
+                {addTodos}
+            </div>
+            </div>
+            </div>
         )
     }
 }
