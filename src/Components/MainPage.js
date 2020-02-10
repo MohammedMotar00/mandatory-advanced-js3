@@ -1,10 +1,65 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Link, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-function MainPage() {
-    return (
-        <div>
+import jwt from 'jsonwebtoken';
+
+import { token$ } from "./TokenStore";
+
+class MainPage extends Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            currentTime: null,
+            tokenExpireTime: null,
+            tokenExpired: false
+        }
+    }
+
+    componentDidMount() {
+        this.interval = setInterval( () => {
+            this.setState({
+                currentTime : new Date().getTime() / 1000   // <-- Gör en sån på alla sidor, så du returnerar automatiskt till login eller main sidan (beroende på vilken sida du är på!)
+            })
+        }, 1000)
+
+        this.subscription = token$.subscribe(token => {
+            const decoded = jwt.decode(token);
+
+            if (decoded) {
+                this.setState({ tokenExpireTime: decoded.exp });
+            }
+            else {
+                return null;
+            }
+        })
+    }
+
+    componentDidUpdate() {
+        let { currentTime, tokenExpireTime } = this.state;
+
+        if (currentTime > tokenExpireTime) {
+            console.log('token expired');
+
+            localStorage.removeItem("token");
+            // this.setState({ tokenExpired: true });
+        }
+    }
+
+    componentWillUnmount() {
+        this.subscription.unsubscribe();
+        clearInterval(this.interval);
+    }
+
+
+    render() {
+        const { tokenExpired } = this.state;
+
+        if (tokenExpired) return <Redirect to="/" />
+
+        return (
+            <div>
             <div className="container">
                 <div className="div-img-background">
                     <Helmet>
@@ -37,7 +92,8 @@ function MainPage() {
                 </div>
             </div>
         </div>
-    )
+        )
+    }
 }
 
-export default MainPage;
+export default MainPage

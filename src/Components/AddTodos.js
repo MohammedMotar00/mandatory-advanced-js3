@@ -105,9 +105,9 @@ class AddTodos extends Component {
 
         let addTodos = todos.map(todo => {
             return (
-                <div key={todo.id}>
-                    <p key={todo.id}>{todo.content}</p>
-                    <button onClick={() => this.deleteAddedTodo(todo.id)}>Delete item</button>
+                <div key={todo.id} className="todo-items">
+                    <p className="item" key={todo.id}>{todo.content}</p>
+                    <button className="delete-btn" onClick={() => this.deleteAddedTodo(todo.id)}>Delete item</button>
                 </div>
             )
         })

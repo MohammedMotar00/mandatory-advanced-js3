@@ -31,7 +31,7 @@ class RenderTodos extends Component {
     componentDidMount() {
         this.interval = setInterval( () => {
             this.setState({
-                currentTime : new Date().getTime() / 1000
+                currentTime : new Date().getTime() / 1000   // <-- Gör en sån på alla sidor, så du returnerar automatiskt till login eller main sidan (beroende på vilken sida du är på!)
             })
         }, 1000)
 
@@ -47,7 +47,7 @@ class RenderTodos extends Component {
                 console.log(decoded.exp);
             }
             else {
-                return null
+                return null;
             }
 
             axios(`${API_ROOT}/todos`, {
@@ -118,7 +118,7 @@ class RenderTodos extends Component {
 
 
     render() {
-        const { todoList, logout, tokenExpired  } = this.state;
+        const { todoList, logout, tokenExpired, currentTime, emailFromToken  } = this.state;
 
         if (logout) return <Redirect to="/login" />
 
@@ -141,6 +141,7 @@ class RenderTodos extends Component {
                 <Helmet>
                     <title>Todo</title>
                 </Helmet>
+                {currentTime}
                 <AddTodos renderedItems={items} logout={btn} />
             </div>
         )

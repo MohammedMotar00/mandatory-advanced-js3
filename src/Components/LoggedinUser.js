@@ -9,21 +9,36 @@ class LoggedinUser extends Component {
         super(props)
     
         this.state = {
-            email: ''
+            email: '',
+
+            currentTime: null,
+            tokenExpireTime: null,
+
+            token: '',
         }
     }
 
     componentDidMount() {
-        token$.subscribe(token => {
+        this.subscription = token$.subscribe(token => {
             const decoded = jwt.decode(token);
+
+            console.log(token)
+            console.log(decoded);
 
             if (token && decoded) {
                 this.setState({ email: decoded.email });
+                this.setState({ tokenExpireTime: decoded.exp });
             }
             else {
                 this.setState({ email: null })
             }
         })
+    }
+
+    componentDidUpdate() {
+        if (this.state.email === null) {
+            this.setState({ email: '' })
+        }
     }
 
 

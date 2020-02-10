@@ -2,11 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'MV Boli';
 }
 
 .todo-page {
     height: 100vh;
-    background: linear-gradient(rgba(26, 26, 26, 0.6), rgba(26, 26, 26, 0.9)), url('../Img/register-img.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.9)), url('../Img/todo-img.jpg') no-repeat center center/cover;
 }
 
 .todo-container {
@@ -25,21 +26,44 @@
     align-items: center;
     position: relative;
     width: 100%;
-    padding: 1.2rem;
+    padding: 1.5rem;
+    margin-bottom: 20px;
     word-break: break-all;
+}
+
+.todo-items:hover {
+    background-color: rgba(114, 114, 26, 0.24);
 }
 
 .item {
     position: absolute;
     top: 0;
-    left: 0;
-    font-size: 1.4rem;
-
+    left: 3rem;
+    height: 100%;
+    font-size: 1.8rem;
+    color: white;
+    /* font-family: 'MV Boli'; */
+    background-color: rgba(8, 75, 87, 0.11);
 }
 
 .delete-btn {
     position: absolute;
     top: 0;
     right: 0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    height: 100%;
+    border-radius: 20px;
+    padding: 0px 50px;
+    color: #ffffff;
+    background-color: #9b676360;
+    border: none;
+    cursor: pointer;
+    transition: all .5s ease;
+    outline: none;
+    font-size: 1.6rem;
+}
+
+.delete-btn:hover {
+    box-shadow: 0px 0px 10px #ffffff;
+    background-color: rgba(179, 15, 15, 0.815);
 }
