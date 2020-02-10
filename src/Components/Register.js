@@ -29,7 +29,7 @@ class Register extends Component {
     }
 
     register = (e) => {
-        let { email, password } = this.state;          // OOOBSSSS !!! fixa logik för att inte kunna submit ifall input fältet är tomt!
+        let { email, password } = this.state;
         const API_ROOT = 'http://3.120.96.16:3002';
 
         let validEmail = /^([A-Z\d\.-]+)@([A-Z\d-]+)\.([A-Z]{2,8})(\.[A-Z]{2,8})?$/i.test(email);

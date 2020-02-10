@@ -115,15 +115,19 @@ class AddTodos extends Component {
 
         return (
             <div >
-            <Link to="/">
-                <p>Main Page</p>
-            </Link>
+                <div className="navLink-container">
+                    <div className="navlink">
+                        <Link className="todo-link" to="/">
+                            <p>Main Page</p>
+                        </Link>
+                    </div>
+                </div>
 
             <form onSubmit={this.rensaInput}>
                 <label>
-                    <input type="text" value={content} onChange={this.onchange} placeholder="Add your todo ..." />
+                    <input className="input" type="text" value={content} onChange={this.onchange} placeholder="Add your todo ..." />
                 </label>
-                <button onClick={this.addTodo}>Add todo</button>
+                <button className="addTodo-btn" onClick={this.addTodo}>Add todo</button>
                 {this.props.logout}
             </form>
 

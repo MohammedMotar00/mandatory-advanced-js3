@@ -4,41 +4,29 @@ import { Link } from 'react-router-dom';
 import {token$} from "./TokenStore";
 import jwt from 'jsonwebtoken';
 
+import '../App.css';
+
 class LoggedinUser extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-            email: '',
-
-            currentTime: null,
-            tokenExpireTime: null,
-
-            token: '',
+            email: null
         }
     }
 
     componentDidMount() {
+
         this.subscription = token$.subscribe(token => {
             const decoded = jwt.decode(token);
 
-            console.log(token)
-            console.log(decoded);
-
             if (token && decoded) {
                 this.setState({ email: decoded.email });
-                this.setState({ tokenExpireTime: decoded.exp });
             }
             else {
                 this.setState({ email: null })
             }
         })
-    }
-
-    componentDidUpdate() {
-        if (this.state.email === null) {
-            this.setState({ email: '' })
-        }
     }
 
 
@@ -48,7 +36,7 @@ class LoggedinUser extends Component {
         return (
             <>
                 <Link to="/todo">
-                    <p style={{ position: 'absolute', top: '1.2rem', right: '1.2rem', zIndex: '100', fontSize: '2rem', color: 'white' }}>{email}</p>
+                    <p className="loggedIn-user">{email}</p>
                 </Link>
             </>
         )

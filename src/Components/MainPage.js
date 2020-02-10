@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import jwt from 'jsonwebtoken';
@@ -12,15 +12,14 @@ class MainPage extends Component {
     
         this.state = {
             currentTime: null,
-            tokenExpireTime: null,
-            tokenExpired: false
+            tokenExpireTime: null
         }
     }
 
     componentDidMount() {
         this.interval = setInterval( () => {
             this.setState({
-                currentTime : new Date().getTime() / 1000   // <-- Gör en sån på alla sidor, så du returnerar automatiskt till login eller main sidan (beroende på vilken sida du är på!)
+                currentTime : new Date().getTime() / 1000
             })
         }, 1000)
 
@@ -40,10 +39,9 @@ class MainPage extends Component {
         let { currentTime, tokenExpireTime } = this.state;
 
         if (currentTime > tokenExpireTime) {
-            console.log('token expired');
-
             localStorage.removeItem("token");
-            // this.setState({ tokenExpired: true });
+            this.subscription.unsubscribe();
+            clearInterval(this.interval);
         }
     }
 
@@ -54,9 +52,6 @@ class MainPage extends Component {
 
 
     render() {
-        const { tokenExpired } = this.state;
-
-        if (tokenExpired) return <Redirect to="/" />
 
         return (
             <div>

@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+.loggedIn-user {
+  position: absolute;
+  top: 1.8rem;
+  right: 1.2rem;
+  z-index: 100;
+  font-size: 2rem;
+  color: white;
+  transition: all .3s ease-in-out;
+}
+
+.loggedIn-user:hover {
+  color: green;
+}
+
 .App {
   text-align: center;
 }

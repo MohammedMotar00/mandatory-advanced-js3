@@ -23,15 +23,13 @@ class RenderTodos extends Component {
 
             tokenExpired: false,
             tokenExpireTime: null,
-
-            emailFromToken: null
         }
     }
 
     componentDidMount() {
         this.interval = setInterval( () => {
             this.setState({
-                currentTime : new Date().getTime() / 1000   // <-- Gör en sån på alla sidor, så du returnerar automatiskt till login eller main sidan (beroende på vilken sida du är på!)
+                currentTime : new Date().getTime() / 1000
             })
         }, 1000)
 
@@ -42,7 +40,6 @@ class RenderTodos extends Component {
             const decoded = jwt.decode(token);
 
             if (decoded) {
-                this.setState({ emailFromToken: decoded.email });
                 this.setState({ tokenExpireTime: decoded.exp });
                 console.log(decoded.exp);
             }
@@ -73,7 +70,6 @@ class RenderTodos extends Component {
     componentWillUnmount() {
         this.subscription.unsubscribe();
         clearInterval(this.interval);
-        this.setState({ emailFromToken: null });
     }
 
     componentDidUpdate() {
@@ -82,7 +78,6 @@ class RenderTodos extends Component {
         if (currentTime > tokenExpireTime) {
             console.log('token expired');
 
-            this.setState({ emailFromToken: null });
             localStorage.removeItem("token");
             this.setState({ tokenExpired: true });
         }
@@ -110,7 +105,6 @@ class RenderTodos extends Component {
     }
 
     logOut = () => {
-        this.setState({ emailFromToken: null });
         localStorage.removeItem('token');
         this.setState({logout: true});
         updateToken(null);
@@ -118,13 +112,13 @@ class RenderTodos extends Component {
 
 
     render() {
-        const { todoList, logout, tokenExpired, currentTime, emailFromToken  } = this.state;
+        const { todoList, logout, tokenExpired, currentTime  } = this.state;
 
         if (logout) return <Redirect to="/login" />
 
         if (tokenExpired) return <Redirect to="/login" />
 
-        const btn = <button onClick={this.logOut}>Logout</button>
+        const btn = <button className="logout" onClick={this.logOut}>Logout</button>
 
         let items = todoList.map(todo => {
             return (
@@ -141,7 +135,6 @@ class RenderTodos extends Component {
                 <Helmet>
                     <title>Todo</title>
                 </Helmet>
-                {currentTime}
                 <AddTodos renderedItems={items} logout={btn} />
             </div>
         )

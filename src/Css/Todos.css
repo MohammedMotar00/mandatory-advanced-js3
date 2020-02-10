@@ -17,7 +17,6 @@
 
 .todo-item-container {
     width: 60%;
-    border: 1px solid;
 }
 
 .todo-items {
@@ -66,4 +65,80 @@
 .delete-btn:hover {
     box-shadow: 0px 0px 10px #ffffff;
     background-color: rgba(179, 15, 15, 0.815);
+}
+
+
+
+/* //// Input //// */
+
+.input {
+    text-align: center;
+    width: 40%;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.151);
+    color: #fff;
+}
+
+.addTodo-btn {
+    position: absolute;
+    right: 15%;
+    font-size: 1.1rem;
+    background-color: rgba(255, 174, 0, 0.315);
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s ease;
+    outline: none;
+    border-radius: 20px;
+    border: none;
+    padding: 0px 50px;
+}
+
+.addTodo-btn:hover {
+    box-shadow: 0px 0px 10px #ffffff;
+}
+
+.logout {
+    position: absolute;
+    top: 1%;
+    right: 0;
+    border: none;
+    background-color: rgba(255, 174, 0, 0.644);
+    color: #fff;
+    cursor: pointer;
+    transition: all .5s ease;
+    outline: none;
+    font-size: 13px;
+    border-radius: 20px;
+    padding: 0px 50px;
+}
+
+.logout:hover {
+    box-shadow: 0px 0px 10px #ffffff;
+}
+
+.navLink-container {
+display: flex;
+justify-content: center;
+}
+
+.navlink {
+padding: 1.4rem;
+}
+
+.todo-link {
+color: rgba(255, 255, 255, 0.603);
+font-size: 2.5rem;
+}
+
+.todo-link:link {
+text-decoration: none;
+}
+
+.todo-link:hover {
+font-size: 2.7rem;
+color: red;
+transition: all .6s ease-in-out;
 }
