@@ -6,7 +6,6 @@ import axios from 'axios';
 import { updateToken } from './TokenStore';
 
 import { Helmet } from 'react-helmet';
-import TokenExpired from './TokenExpired';
 
 class LogIn extends Component {
     constructor(props) {
@@ -91,8 +90,6 @@ class LogIn extends Component {
 
         return (
             <>
-            <TokenExpired />
-
             <div className="register-login-container">
                 <div className="my-login-page">
                     <div className="navLinks-container">

@@ -4,7 +4,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import '../Css/Register-Login.css';
-import TokenExpired from './TokenExpired';
 
 class Register extends Component {
     constructor(props) {
@@ -76,8 +75,6 @@ class Register extends Component {
 
         return (
             <div>
-            <TokenExpired />
-
             <div className="register-login-container">
                 <div className="my-register-page">
                     <div className="navLinks-container">
