@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 
 import jwt from 'jsonwebtoken';
 
-import { token$ } from "./TokenStore";
+import { token$, updateToken } from "./TokenStore";
 
 class MainPage extends Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class MainPage extends Component {
         let { currentTime, tokenExpireTime } = this.state;
 
         if (currentTime > tokenExpireTime) {
-            localStorage.removeItem("token");
+            updateToken(null);
             this.subscription.unsubscribe();
             clearInterval(this.interval);
         }

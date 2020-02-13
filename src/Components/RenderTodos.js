@@ -41,7 +41,6 @@ class RenderTodos extends Component {
 
             if (decoded) {
                 this.setState({ tokenExpireTime: decoded.exp });
-                console.log(decoded.exp);
             }
             else {
                 return null;
@@ -53,7 +52,6 @@ class RenderTodos extends Component {
                 },
             })
             .then(res => {
-                console.log(res.data.todos);
 
                 let todos = res.data.todos;
 
@@ -78,7 +76,7 @@ class RenderTodos extends Component {
         if (currentTime > tokenExpireTime) {
             console.log('token expired');
 
-            localStorage.removeItem("token");
+            updateToken(null);
             this.setState({ tokenExpired: true });
         }
     }
@@ -105,14 +103,13 @@ class RenderTodos extends Component {
     }
 
     logOut = () => {
-        localStorage.removeItem('token');
         this.setState({logout: true});
         updateToken(null);
     }
 
 
     render() {
-        const { todoList, logout, tokenExpired, currentTime  } = this.state;
+        const { todoList, logout, tokenExpired } = this.state;
 
         if (logout) return <Redirect to="/login" />
 

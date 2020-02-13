@@ -16,6 +16,7 @@ class LogIn extends Component {
             password: '',
 
             loggedIn: false,
+            alreadyLoggedIn: false,
 
             invalidLogin: false,
             errLogin: '',
@@ -80,9 +81,11 @@ class LogIn extends Component {
 
 
     render() {
-        const { email, password, loggedIn, errLogin } = this.state;
+        const { email, password, loggedIn, alreadyLoggedIn, errLogin } = this.state;
 
         if (loggedIn) return <Redirect to="/todo" />
+
+        if (alreadyLoggedIn) return <Redirect to="/todo" />
 
 
         return (
